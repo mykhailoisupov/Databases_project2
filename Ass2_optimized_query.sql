@@ -11,7 +11,7 @@ CREATE INDEX idx_customer_name ON customers(customer_name);
 
 EXPLAIN ANALYZE
 WITH customer_revenue AS (
--- 1. Calculate revenue for EACH customer and include customer_id
+/* 1. Calculate revenue for EACH customer and include customer_id */
     SELECT
         s.customer_id,
         SUM(s.quantity * p.price) AS revenue
@@ -24,7 +24,7 @@ WITH customer_revenue AS (
       AND s.sale_date BETWEEN '2024-01-01' AND '2024-03-31'
     GROUP BY s.customer_id
 )
--- 2. JOIN the customers table to the CTE
+/* 2. JOIN the customers table to the CTE */
 SELECT
     c.customer_name,
     cr.revenue AS total_revenue
@@ -36,4 +36,5 @@ WHERE
     c.region = 'North'
 ORDER BY
     total_revenue DESC
+
 LIMIT 10;
