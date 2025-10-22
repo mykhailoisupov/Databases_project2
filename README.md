@@ -50,8 +50,6 @@ This allowed the database to replace full table scans with **Index Seeks** and *
 The correlated subqueries were replaced with a **Common Table Expression (CTE)** that precomputes customer revenues in one pass.  
 The CTE is executed once, stores the intermediate results in memory, and then joins efficiently with the customers table to filter by region and sort the top spenders.
 
-This change transformed the query from a procedural approach to a **declarative**, set-based one — allowing the SQL optimizer to plan and execute it efficiently.
-
 ---
 
 ## 3. Performance Evaluation
@@ -60,13 +58,13 @@ Performance was evaluated using `EXPLAIN ANALYZE` before and after optimization.
 
 ### Before Optimization
 - Execution plan showed **dependent subqueries** and **full table scans**.  
-- Runtime was high (seconds or even minutes on large data).  
+- Runtime was high (more than 40 minutes).  
 - CPU and I/O usage were excessive.
 
 ### After Optimization
 - **No correlated subqueries** in the plan.  
 - **Index scans** used for joins and filters.  
-- Runtime reduced to **milliseconds**.  
+- Runtime reduced to **6 seconds**.  
 - Query became **scalable and maintainable** for future data growth.
 
 ---
@@ -84,7 +82,7 @@ Through this optimization, the query became:
 
 ## Conclusion
 
-This project demonstrates the impact of understanding **SQL execution plans** and applying **indexing** and **set-based design principles**.  
+This project demonstrates the impact of understanding **SQL execution plans** and applying **indexing**.  
 By shifting from a procedural to a declarative model, the database optimizer can fully leverage its capabilities — resulting in a query that is both **high-performance** and **elegant**.
 
 ## ***
