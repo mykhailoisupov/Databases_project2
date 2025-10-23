@@ -15,8 +15,8 @@ WITH customer_revenue AS (
     SELECT
         s.customer_id,
         SUM(s.quantity * p.price) AS revenue
-    FROM USE INDEX idx_customer_id_sale
-        sales s
+    FROM 
+        sales s USE INDEX idx_customer_id_sale
             JOIN
         products p ON s.product_id = p.product_id
     WHERE
@@ -38,4 +38,5 @@ ORDER BY
     total_revenue DESC
 
 LIMIT 10;
+
 
